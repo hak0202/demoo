@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LearnHub - Online Education Platform</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        nav {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 1rem 2rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: opacity 0.3s;
+        }
+
+        nav a:hover {
+            opacity: 0.8;
+        }
+
+        .page {
+            display: none;
+            min-height: calc(100vh - 80px);
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 4rem 2rem;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+        }
+
+        .courses-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .course-card {
+            background: white;
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .course-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+        }
+
+        .course-card h3 {
+            color: #667eea;
+            margin-bottom: 1rem;
+        }
+
+        .course-card p {
+            color: #666;
+            margin-bottom: 1rem;
+        }
+
+        .btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 0.8rem 2rem;
+            border: none;
+            border-radius: 25px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .btn:hover {
+            transform: scale(1.05);
+        }
+
+        .form-container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #333;
+            font-weight: 600;
+        }
+
+        input, textarea, select {
+            width: 100%;
+            padding: 0.8rem;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        input:focus, textarea:focus, select:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .success-message {
+            display: none;
+            background: #4caf50;
+            color: white;
+            padding: 1rem;
+            border-radius: 5px;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .feature {
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        footer {
+            background: #333;
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 3rem;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="#" data-page="home">Home</a></li>
+            <li><a href="#" data-page="courses">Courses</a></li>
+            <li><a href="#" data-page="enroll">Enroll</a></li>
+            <li><a href="#" data-page="about">About</a></li>
+            <li><a href="#" data-page="contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <div id="home" class="page active">
+        <div class="hero">
+            <h1>Welcome to LearnHub</h1>
+            <p>Transform Your Future with Quality Online Education</p>
+            <button class="btn" onclick="navigateTo('courses')">Explore Courses</button>
+        </div>
+        <div class="container">
+            <h2 style="text-align: center; margin-bottom: 2rem;">Why Choose LearnHub?</h2>
+            <div class="courses-grid">
+                <div class="course-card">
+                    <h3>🎓 Expert Instructors</h3>
+                    <p>Learn from industry professionals with years of experience</p>
+                </div>
+                <div class="course-card">
+                    <h3>⏰ Flexible Learning</h3>
+                    <p>Study at your own pace, anytime and anywhere</p>
+                </div>
+                <div class="course-card">
+                    <h3>📜 Certified Programs</h3>
+                    <p>Earn recognized certificates upon course completion</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="courses" class="page">
+        <div class="container">
+            <h1 style="text-align: center; color: #667eea; margin-bottom: 2rem;">Our Courses</h1>
+            <div class="courses-grid">
+                <div class="course-card">
+                    <h3>Web Development Bootcamp</h3>
+                    <p>Master HTML, CSS, JavaScript, and modern frameworks</p>
+                    <p><strong>Duration:</strong> 12 weeks</p>
+                    <p><strong>Level:</strong> Beginner to Advanced</p>
+                    <button class="btn" onclick="navigateTo('enroll')">Enroll Now</button>
+                </div>
+                <div class="course-card">
+                    <h3>Data Science & Analytics</h3>
+                    <p>Learn Python, machine learning, and data visualization</p>
+                    <p><strong>Duration:</strong> 16 weeks</p>
+                    <p><strong>Level:</strong> Intermediate</p>
+                    <button class="btn" onclick="navigateTo('enroll')">Enroll Now</button>
+                </div>
+                <div class="course-card">
+                    <h3>Digital Marketing Mastery</h3>
+                    <p>SEO, social media, content marketing, and analytics</p>
+                    <p><strong>Duration:</strong> 10 weeks</p>
+                    <p><strong>Level:</strong> Beginner</p>
+                    <button class="btn" onclick="navigateTo('enroll')">Enroll Now</button>
+                </div>
+                <div class="course-card">
+                    <h3>Graphic Design Fundamentals</h3>
+                    <p>Adobe suite, design principles, and portfolio building</p>
+                    <p><strong>Duration:</strong> 8 weeks</p>
+                    <p><strong>Level:</strong> Beginner</p>
+                    <button class="btn" onclick="navigateTo('enroll')">Enroll Now</button>
+                </div>
+                <div class="course-card">
+                    <h3>Business Management</h3>
+                    <p>Leadership, strategy, finance, and operations</p>
+                    <p><strong>Duration:</strong> 14 weeks</p>
+                    <p><strong>Level:</strong> All Levels</p>
+                    <button class="btn" onclick="navigateTo('enroll')">Enroll Now</button>
+                </div>
+                <div class="course-card">
+                    <h3>Mobile App Development</h3>
+                    <p>Build iOS and Android apps with React Native</p>
+                    <p><strong>Duration:</strong> 12 weeks</p>
+                    <p><strong>Level:</strong> Intermediate</p>
+                    <button class="btn" onclick="navigateTo('enroll')">Enroll Now</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="enroll" class="page">
+        <div class="container">
+            <h1 style="text-align: center; color: #667eea; margin-bottom: 2rem;">Enroll in a Course</h1>
+            <div class="form-container">
+                <div id="successMessage" class="success-message">
+                    Thank you for enrolling! We'll contact you within 24 hours.
+                </div>
+                <form id="enrollForm">
+                    <div class="form-group">
+                        <label for="fullName">Full Name *</label>
+                        <input type="text" id="fullName" name="fullName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email Address *</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Phone Number *</label>
+                        <input type="tel" id="phone" name="phone" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="course">Select Course *</label>
+                        <select id="course" name="course" required>
+                            <option value="">Choose a course...</option>
+                            <option value="web-dev">Web Development Bootcamp</option>
+                            <option value="data-science">Data Science & Analytics</option>
+                            <option value="digital-marketing">Digital Marketing Mastery</option>
+                            <option value="graphic-design">Graphic Design Fundamentals</option>
+                            <option value="business">Business Management</option>
+                            <option value="mobile-dev">Mobile App Development</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="experience">Previous Experience</label>
+                        <select id="experience" name="experience">
+                            <option value="none">No Experience</option>
+                            <option value="beginner">Beginner</option>
+                            <option value="intermediate">Intermediate</option>
+                            <option value="advanced">Advanced</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Additional Information</label>
+                        <textarea id="message" name="message" placeholder="Tell us about your goals and expectations..."></textarea>
+                    </div>
+                    <button type="submit" class="btn" style="width: 100%;">Submit Enrollment</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div id="about" class="page">
+        <div class="container">
+            <h1 style="text-align: center; color: #667eea; margin-bottom: 2rem;">About LearnHub</h1>
+            <p style="text-align: center; font-size: 1.2rem; max-width: 800px; margin: 0 auto 3rem;">
+                LearnHub is a leading online education platform dedicated to making quality education accessible to everyone. 
+                Founded in 2020, we've helped over 50,000 students achieve their learning goals.
+            </p>
+            <div class="about-content">
+                <div class="feature">
+                    <div class="feature-icon">🌟</div>
+                    <h3>Our Mission</h3>
+                    <p>To democratize education and empower learners worldwide with skills for the future</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">👥</div>
+                    <h3>Expert Team</h3>
+                    <p>Over 200 industry professionals creating world-class content</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">🏆</div>
+                    <h3>Proven Results</h3>
+                    <p>95% of our graduates report career advancement within 6 months</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">🌍</div>
+                    <h3>Global Reach</h3>
+                    <p>Students from over 150 countries trust LearnHub for their education</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="contact" class="page">
+        <div class="container">
+            <h1 style="text-align: center; color: #667eea; margin-bottom: 2rem;">Contact Us</h1>
+            <div class="form-container">
+                <div id="contactSuccessMessage" class="success-message">
+                    Thank you for contacting us! We'll respond within 24 hours.
+                </div>
+                <form id="contactForm">
+                    <div class="form-group">
+                        <label for="contactName">Name *</label>
+                        <input type="text" id="contactName" name="contactName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="contactEmail">Email *</label>
+                        <input type="email" id="contactEmail" name="contactEmail" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="subject">Subject *</label>
+                        <input type="text" id="subject" name="subject" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="contactMessage">Message *</label>
+                        <textarea id="contactMessage" name="contactMessage" required></textarea>
+                    </div>
+                    <button type="submit" class="btn" style="width: 100%;">Send Message</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 LearnHub. All rights reserved.</p>
+        <p>Empowering learners worldwide through quality education</p>
+    </footer>
+
+    <script>
+        // Navigation system
+        function navigateTo(pageName) {
+            document.querySelectorAll('.page').forEach(page => {
+                page.classList.remove('active');
+            });
+            document.getElementById(pageName).classList.add('active');
+            window.scrollTo(0, 0);
+        }
+
+        // Handle navigation clicks
+        document.querySelectorAll('nav a').forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const page = e.target.getAttribute('data-page');
+                navigateTo(page);
+            });
+        });
+
+        // Enrollment form submission
+        document.getElementById('enrollForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const formData = {
+                fullName: document.getElementById('fullName').value,
+                email: document.getElementById('email').value,
+                phone: document.getElementById('phone').value,
+                course: document.getElementById('course').value,
+                experience: document.getElementById('experience').value,
+                message: document.getElementById('message').value
+            };
+            
+            console.log('Enrollment submitted:', formData);
+            
+            document.getElementById('successMessage').style.display = 'block';
+            document.getElementById('enrollForm').reset();
+            
+            setTimeout(() => {
+                document.getElementById('successMessage').style.display = 'none';
+            }, 5000);
+        });
+
+        // Contact form submission
+        document.getElementById('contactForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const formData = {
+                name: document.getElementById('contactName').value,
+                email: document.getElementById('contactEmail').value,
+                subject: document.getElementById('subject').value,
+                message: document.getElementById('contactMessage').value
+            };
+            
+            console.log('Contact form submitted:', formData);
+            
+            document.getElementById('contactSuccessMessage').style.display = 'block';
+            document.getElementById('contactForm').reset();
+            
+            setTimeout(() => {
+                document.getElementById('contactSuccessMessage').style.display = 'none';
+            }, 5000);
+        });
+    </script>
+</body>
+</html>
